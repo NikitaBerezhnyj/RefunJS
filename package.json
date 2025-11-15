@@ -1,6 +1,6 @@
 {
   "name": "refunjs",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Modern React-based framework for building scalable web applications with enhanced developer experience",
   "type": "module",
   "main": "core/index.js",
@@ -19,8 +19,10 @@
   "scripts": {
     "start": "node src/index.js",
     "build": "babel src --out-dir dist --copy-files",
-    "prepublishOnly": "node scripts/prepare-readme.js",
-    "postpublish": "node scripts/restore-readme.js"
+    "prepare-publish": "shx cp README.md README.backup.md && shx cp docs/README.md README.md",
+    "cleanup-publish": "shx mv README.backup.md README.md",
+    "prepublishOnly": "npm run prepare-publish",
+    "postpublish": "npm run cleanup-publish"
   },
   "repository": {
     "type": "git",
