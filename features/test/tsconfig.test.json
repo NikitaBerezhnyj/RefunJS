@@ -1,0 +1,16 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "types": [
+            "jest",
+            "@testing-library/jest-dom",
+            "node"
+        ]
+    },
+    "include": [
+        "tests",
+        "global.d.ts"
+    ]
+}

@@ -1,0 +1,54 @@
+{
+  "header": {
+    "logo": "RefunJS",
+    "selectLanguage": "Language"
+  },
+  "home": {
+    "badge": "React Framework",
+    "title": { "main": "Build React applications", "highlight": "faster" },
+    "subtitle": "RefunJS is a React-based framework with file-based routing, built-in tools, and modern development practices. Start working in seconds, not hours.",
+    "buttons": { "viewDemo": "View Demo" },
+    "features": {
+      "title": { "part1": "Everything you need", "part2": "out of the box" },
+      "subtitle": "Don’t waste time on configuration. Start coding right away.",
+      "items": {
+        "quickStart": {
+          "title": "Quick Start",
+          "description": "Ready-to-use React + TypeScript with minimal setup"
+        },
+        "fileRouting": {
+          "title": "File-based Routing",
+          "description": "Automatic routing based on the pages/ folder structure"
+        },
+        "cssModules": {
+          "title": "CSS Modules",
+          "description": "Isolated styles with support for CSS variables and dark mode"
+        },
+        "libs": {
+          "title": "Preinstalled Libraries",
+          "description": "React Query, Zustand, React Router included and preconfigured"
+        },
+        "typescript": {
+          "title": "TypeScript",
+          "description": "Full TypeScript support with preconfigured settings"
+        },
+        "vite": {
+          "title": "Vite",
+          "description": "Blazingly fast dev server and optimized build"
+        }
+      }
+    },
+    "codeExamples": [
+      { "title": "Create a Project" },
+      { "title": "Add a Page" },
+      { "title": "Add a Component" }
+    ],
+    "tech": {
+      "title": { "part1": "Built on", "part2": "proven technologies" }
+    },
+    "cta": {
+      "title": "Ready to get started?",
+      "text": "Create your first project with RefunJS in just a few seconds"
+    }
+  }
+}
