@@ -1,6 +1,6 @@
 {
   "name": "refunjs",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Modern React-based framework for building scalable web applications with enhanced developer experience",
   "type": "module",
   "main": "core/index.js",
