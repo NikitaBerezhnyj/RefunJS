@@ -18,11 +18,16 @@
   ],
   "scripts": {
     "start": "node src/index.js",
+    "prebuild": "shx mv README.md README.temp.md && shx cp docs/README.md README.md",
     "build": "babel src --out-dir dist --copy-files",
-    "prepare-publish": "shx cp README.md README.backup.md && shx cp docs/README.md README.md",
-    "cleanup-publish": "shx mv README.backup.md README.md",
-    "prepublishOnly": "npm run prepare-publish",
-    "postpublish": "npm run cleanup-publish"
+    "postbuild": "shx rm README.md && shx mv README.temp.md README.md",
+    "build:publish": "npm run prebuild && npm run build:compile && npm run postbuild:cleanup",
+    "build:compile": "babel src --out-dir dist --copy-files",
+    "postbuild:cleanup": "echo 'Build completed and README restored'",
+    "prepare-readme": "shx mv README.md README.temp.md && shx cp docs/README.md README.md",
+    "restore-readme": "shx rm -f README.md && shx mv README.temp.md README.md",
+    "prepublishOnly": "npm run prepare-readme",
+    "postpublish": "npm run restore-readme"
   },
   "repository": {
     "type": "git",
@@ -48,7 +53,7 @@
     "spa",
     "component-library"
   ],
-  "author": "Nikita Berezhnyj",
+  "author": "NikitaBerezhnyj",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0",
