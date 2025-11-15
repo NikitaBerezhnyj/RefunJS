@@ -1,8 +1,12 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { Card, CardHeader, CardBody, CardFooter } from "../src/components/Card/Card";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+} from "../src/components/Card/Card";
 
-// Тестуємо базовий рендеринг
 describe("Card component", () => {
   it("renders children correctly", () => {
     render(
@@ -42,7 +46,9 @@ describe("CardHeader component", () => {
   });
 
   it("applies custom className", () => {
-    const { container } = render(<CardHeader className="extra">Header</CardHeader>);
+    const { container } = render(
+      <CardHeader className="extra">Header</CardHeader>
+    );
     expect(container.firstChild).toHaveClass("extra");
   });
 });
@@ -76,7 +82,9 @@ describe("CardFooter component", () => {
   });
 
   it("applies custom className", () => {
-    const { container } = render(<CardFooter className="bottom">Footer</CardFooter>);
+    const { container } = render(
+      <CardFooter className="bottom">Footer</CardFooter>
+    );
     expect(container.firstChild).toHaveClass("bottom");
   });
 });
