@@ -1,245 +1,649 @@
 # RefunJS
 
-🚀 Quick start for React applications with TypeScript, file-based routing, and modern development tools.
+Repository has a [English :uk:](#refunjs-uk) and [Ukrainian :ukraine:](#refunjs-ukraine) localization.
 
-## Features
+## RefunJS :uk:
 
-- ⚡ **Quick Start** — ready-to-use React + TypeScript with minimal configuration
-- 🎯 **File-based Routing** — automatic routing based on the `pages/` folder structure
-- 🎨 **CSS Modules** — isolated styles with CSS variables and dark theme support
-- 📦 **Pre-installed Libraries** — React Query, Zustand, React Router included
-- 🔧 **TypeScript** — full TypeScript support with pre-configuration
-- 🚀 **Vite** — blazingly fast dev server and optimized build
-- 🌍 **i18n (optional)** — multi-language support
-- 🧪 **Tests (optional)** — Jest with testing configuration
+🚀 A modern React framework with file-based routing, built-in tooling, and zero-config setup. Create production-ready React applications in seconds.
 
-## Quick Start
+### Overview
 
-Create a new project with a single command:
+RefunJS is a CLI tool and framework that streamlines React application development by providing:
+
+- **Zero-config setup** — Start coding immediately without spending hours on configuration
+
+- **File-based routing** — Automatic route generation based on your folder structure
+
+- **Modern tooling** — Pre-configured TypeScript, Vite, ESLint, and Prettier
+
+- **Smart defaults** — Carefully selected libraries and patterns that work together seamlessly
+
+- **Optional features** — Add testing (Jest) and internationalization (i18n) when you need them
+
+RefunJS eliminates the repetitive setup work while maintaining full flexibility and control over your codebase.
+
+### Features
+
+- ⚡ **Instant Setup** — Create a full-featured React project with one command
+
+- 🎯 **File-based Routing** — Automatic routing from `pages/` folder structure, including dynamic routes
+
+- 🎨 **CSS Modules** — Scoped styling with CSS variables and dark mode support out of the box
+
+- 📦 **Pre-installed Stack** — React Query, Zustand, React Router pre-configured and ready to use
+
+- 🔧 **Full TypeScript** — Type safety across the entire project with optimized tsconfig
+
+- 🚀 **Vite Powered** — Lightning-fast HMR and optimized production builds
+
+- 🌍 **i18n Ready** — Optional multi-language support with i18next integration
+
+- 🧪 **Testing Setup** — Optional Jest configuration with React Testing Library
+
+- 📝 **Code Quality** — ESLint and Prettier pre-configured with sensible rules
+
+- 🛠️ **CLI Tools** — Generate pages and components with proper structure and naming conventions
+
+### Technologies Used
+
+#### Core Framework
+
+- **React** — Latest React with modern features
+
+- **TypeScript** — Type-safe development
+
+- **Vite** — Next-generation frontend tooling
+
+#### State & Routing
+
+- **React Router** — Declarative routing for React
+
+- **React Query** — Powerful data synchronization and caching
+
+- **Zustand** — Lightweight state management
+
+#### Development Tools
+
+- **ESLint** — Pluggable linting utility
+
+- **Prettier** — Opinionated code formatter
+
+- **Jest** (optional) — Delightful JavaScript testing
+
+- **i18next** (optional) — Internationalization framework
+
+#### Styling
+
+- **CSS Modules** — Component-scoped CSS
+
+- **Lucide React** — Beautiful & consistent icon toolkit
+
+## Getting Started
+
+To get started with RefunJS development, follow these steps:
+
+#### 1. Clone the Repository
 
 ```bash
-npx refunjs my-app
-cd my-app
+
+git clone https://github.com/yourusername/refunjs.git
+
+cd refunjs
+
+```
+
+#### 2. Install Dependencies
+
+```bash
+
+npm install
+
+```
+
+#### 3. Build the CLI
+
+```bash
+
+npm run build
+
+```
+
+#### 4. Link Locally for Testing
+
+```bash
+
+npm link
+
+```
+
+Now you can use the `refunjs` command globally on your system for testing:
+
+```bash
+
+refunjs my-test-app
+
+cd my-test-app
+
 npm run dev
-```
-
-## Usage
-
-### Creating a Project
-
-```bash
-npx refunjs <project-name>
-```
-
-During project creation, you can select additional features:
-
-- **Tests (Jest)** — configuration for unit testing
-- **i18n** — localization support
-
-### CLI Commands
-
-#### `create`
-
-Creates a new project with base structure.
-
-```bash
-npx refunjs create my-app
-# or simply
-npx refunjs my-app
-```
-
-#### `add-page`
-
-Adds a new page with proper file structure.
-
-```bash
-# Simple page
-npx refunjs add-page about
-
-# Nested page
-npx refunjs add-page blog/article
-
-# Dynamic route (use escape characters to properly generate pages)
-npx refunjs add-page blog/\[id\]
-```
-
-Creates:
-
-- `src/pages/<name>/index.tsx` — React page component
-- `src/pages/<name>/<name>.module.css` — CSS module
-
-**Note:** page names should be in kebab-case format (e.g., `my-page`, `user-profile`)
-
-#### `add-component`
-
-Adds a new component.
-
-```bash
-npx refunjs add-component Button
-```
-
-Creates:
-
-- `src/components/<ComponentName>/<ComponentName>.tsx`
-- `src/components/<ComponentName>/<ComponentName>.module.css`
-
-**Note:** component names should be in PascalCase format (e.g., `UserCard`, `NavBar`)
-
-#### `help`
-
-Shows help for available commands.
-
-```bash
-npx refunjs help
-```
-
-## Project Structure
 
 ```
-my-app/
+
+#### 5. Project Structure
+
+```
+
+refunjs/
+
 ├── src/
-│   ├── .refunjs/         # Framework system files
-│   ├── components/     # Reusable components
-│   │   ├── Button/
-│   │   ├── Card/
-│   │   └── Header/
-│   ├── pages/          # File-based routing
-│   │   └── index.tsx   # Home page (/)
-│   ├── hooks/          # Custom React hooks
-│   ├── utils/          # Helper functions
-│   ├── styles/         # Global styles
-│   ├── App.tsx         # Main application component
-│   └── main.tsx        # Entry point
-├── public/             # Static files
+
+│   ├── commands/           # CLI command implementations
+
+│   │   ├── createProject.js
+
+│   │   ├── addPage.js
+
+│   │   ├── addComponent.js
+
+│   │   ├── installCommand.js
+
+│   │   └── helpCommand.js
+
+│   ├── utils/             # Helper functions
+
+│   │   ├── copyDir.js
+
+│   │   ├── replaceInFiles.js
+
+│   │   ├── installDependencies.js
+
+│   │   ├── mergeFiles.js
+
+│   │   └── namingUtils.js
+
+│   └── index.js           # CLI entry point
+
+├── core/                  # Base project template
+
+│   ├── src/
+
+│   │   ├── .refunjs/       # Framework system files
+
+│   │   ├── components/   # Reusable components
+
+│   │   ├── pages/        # Page components
+
+│   │   ├── hooks/        # Custom hooks
+
+│   │   ├── utils/        # Utilities
+
+│   │   └── styles/       # Global styles
+
+│   ├── public/
+
+│   ├── package.json
+
+│   ├── tsconfig.json
+
+│   └── vite.config.ts
+
+├── features/              # Optional feature modules
+
+│   ├── test/             # Jest testing setup
+
+│   └── i18n/             # Internationalization
+
 ├── package.json
-├── tsconfig.json
-└── vite.config.ts
-```
 
-## File-based Routing
-
-The `pages/` folder structure is automatically converted to routes:
+└── README.md
 
 ```
-src/pages/
-├── index.tsx           → /
-├── about/
-│   └── index.tsx       → /about
-├── blog/
-│   ├── index.tsx       → /blog
-│   └── [id]/
-│       └── index.tsx   → /blog/:id
-└── users/
-    └── [userId]/
-        └── profile/
-            └── index.tsx → /users/:userId/profile
-```
 
-## Available Scripts
+### Usage
 
-After creating a project, the following commands are available:
+Once the project is set up for development, you can:
+
+#### 1. Test CLI Commands
+
+Create a test project to verify changes:
 
 ```bash
-npm run dev      # Start dev server
-npm run build    # Build for production
-npm run preview  # Preview production build
-npm run lint     # Check code with ESLint
-npm run format   # Format code with Prettier
-npm run test     # Run tests (if selected during creation)
+
+refunjs create test-project
+
+cd test-project
+
+npm run dev
+
 ```
 
-## Technologies
+#### 2. Modify the Core Template
 
-- **React** — library for building UI
-- **TypeScript** — JavaScript with types
-- **Vite** — build tool
-- **React Router** — routing
-- **React Query** — server state management
-- **Zustand** — client state management
-- **CSS Modules** — modular styles
-- **ESLint** — code linting
-- **Prettier** — code formatting
+Edit files in the `core/` directory to change the default project structure:
 
-### Optional Features
+- Update `core/src/` to modify the base application
 
-- **Jest** — testing framework
-- **i18next** — internationalization
+- Add new components in `core/src/components/`
 
-## Usage Examples
+- Modify styling in `core/src/styles/`
 
-### Creating a Simple Page
+- Update dependencies in `core/package.json`
+
+#### 3. Add or Modify Features
+
+Work on optional features in the `features/` directory:
+
+- **Testing setup**: `features/test/`
+
+- **Internationalization**: `features/i18n/`
+
+Each feature module contains:
+
+- Component modifications/additions
+
+- Configuration files
+
+- Dependencies in `package.json`
+
+#### 4. Update CLI Commands
+
+Modify command implementations in `src/commands/`:
+
+- `createProject.js` — Project initialization logic
+
+- `addPage.js` — Page generation with file-based routing
+
+- `addComponent.js` — Component scaffolding
+
+- `installCommand.js` — Dependency management
+
+- `helpCommand.js` — CLI help documentation
+
+#### 5. Test Changes
+
+Before submitting changes:
 
 ```bash
-npx refunjs add-page contact
+
+# Build the CLI
+
+npm run build
+
+
+# Test in a clean directory
+
+cd /tmp
+
+refunjs test-app
+
+cd test-app
+
+npm run dev
+
+npm run build
+
+npm run test  # If test feature was selected
+
 ```
 
-Generated file `src/pages/contact/index.tsx`:
+#### 6. Code Quality
 
-```tsx
-import React from "react";
-import styles from "./contact.module.css";
-
-const Contact = () => {
-  return <h1>Contact</h1>;
-};
-
-export default Contact;
-```
-
-### Creating a Component
+Maintain code quality:
 
 ```bash
-npx refunjs add-component UserCard
+
+# Format code
+
+npm run format
+
+
+# Lint code (if configured)
+
+npm run lint
+
 ```
 
-Generated file `src/components/UserCard/UserCard.tsx`:
+### Development Workflow
 
-```tsx
-import React from "react";
-import styles from "./UserCard.module.css";
+1. **Make Changes** — Edit files in `src/`, `core/`, or `features/`
 
-const UserCard = () => {
-  return <div>UserCard</div>;
-};
+2. **Build** — Run `npm run build` to compile changes
 
-export default UserCard;
-```
+3. **Test** — Create a test project and verify functionality
 
-## Localization (i18n)
+4. **Commit** — Use clear, descriptive commit messages
 
-If you selected the i18n feature during project creation:
+5. **Submit PR** — Open a pull request with your changes
 
-```typescript
-import { useTranslation } from "react-i18next";
+### License & Community Guidelines
 
-const MyComponent = () => {
-  const { t } = useTranslation();
+- [License](LICENSE) — project license
 
-  return <h1>{t("home.title")}</h1>;
-};
-```
+- [Code of Conduct](CODE_OF_CONDUCT.md) — expected behavior for contributors
 
-Translation files are located in `src/locales/`:
+- [Contributing Guide](CONTRIBUTING.md) — how to help the project
 
-- `src/locales/en.json`
-- `src/locales/uk.json`
+- [Security Policy](SECURITY.md) — reporting security issues
 
-## Testing
+---
 
-If you selected the Tests feature during project creation:
+## RefunJS :ukraine:
+
+🚀 Сучасний React фреймворк з file-based роутингом, вбудованим інструментарієм та налаштуванням без конфігурації. Створюйте готові до продакшену React-додатки за лічені секунди.
+
+### Огляд
+
+RefunJS — це CLI інструмент та фреймворк, який спрощує розробку React-додатків, надаючи:
+
+- **Налаштування без конфігурації** — Почніть кодувати одразу, не витрачаючи години на налаштування
+
+- **File-based роутинг** — Автоматична генерація маршрутів на основі структури папок
+
+- **Сучасний інструментарій** — Преконфігуровані TypeScript, Vite, ESLint та Prettier
+
+- **Розумні налаштування за замовчуванням** — Ретельно підібрані бібліотеки та патерни, які безперешкодно працюють разом
+
+- **Опціональні функції** — Додавайте тестування (Jest) та інтернаціоналізацію (i18n), коли вам це потрібно
+
+RefunJS усуває повторювану роботу з налаштування, зберігаючи повну гнучкість та контроль над вашою кодовою базою.
+
+### Особливості
+
+- ⚡ **Миттєве налаштування** — Створіть повнофункціональний React-проєкт однією командою
+
+- 🎯 **File-based роутинг** — Автоматичний роутинг із структури папки `pages/`, включаючи динамічні маршрути
+
+- 🎨 **CSS Modules** — Ізольована стилізація зі змінними CSS та підтримкою темної теми з коробки
+
+- 📦 **Преінстальований стек** — React Query, Zustand, React Router преконфігуровані та готові до використання
+
+- 🔧 **Повна підтримка TypeScript** — Типобезпека у всьому проєкті з оптимізованим tsconfig
+
+- 🚀 **На основі Vite** — Блискавично швидкий HMR та оптимізовані production збірки
+
+- 🌍 **Готовність до i18n** — Опціональна підтримка багатомовності з інтеграцією i18next
+
+- 🧪 **Налаштування тестування** — Опціональна конфігурація Jest з React Testing Library
+
+- 📝 **Якість коду** — ESLint та Prettier преконфігуровані з розумними правилами
+
+- 🛠️ **CLI інструменти** — Генеруйте сторінки та компоненти з правильною структурою та конвенціями іменування
+
+### Використані технології
+
+#### Основний фреймворк
+
+- **React** — Найновіший React з сучасними можливостями
+
+- **TypeScript** — Типобезпечна розробка
+
+- **Vite** — Інструментарій фронтенду нового покоління
+
+#### Стан та роутинг
+
+- **React Router** — Декларативний роутинг для React
+
+- **React Query** — Потужна синхронізація та кешування даних
+
+- **Zustand** — Легке управління станом
+
+#### Інструменти розробки
+
+- **ESLint** — Утиліта для лінтингу з підтримкою плагінів
+
+- **Prettier** — Опініонований форматувач коду
+
+- **Jest** (опціонально) — Чудовий фреймворк для тестування JavaScript
+
+- **i18next** (опціонально) — Фреймворк інтернаціоналізації
+
+#### Стилізація
+
+- **CSS Modules** — CSS з областю видимості компонента
+
+- **Lucide React** — Красивий та консистентний набір іконок
+
+### Початок роботи
+
+Щоб почати розробку RefunJS, виконайте наступні кроки:
+
+#### 1. Клонуйте репозиторій
 
 ```bash
-npm run test
+
+git clone https://github.com/NikitaBerezhnyj/RefunJS.git
+
+cd refunjs
+
 ```
 
-Example test:
+#### 2. Встановіть залежності
 
-```typescript
-import { render, screen } from "@testing-library/react";
-import HomePage from "./HomePage";
+```bash
 
-test("renders home page", () => {
-  render(<HomePage />);
-  expect(screen.getByText(/Build React applications/i)).toBeInTheDocument();
-});
+npm install
+
 ```
+
+#### 3. Зберіть CLI
+
+```bash
+
+npm run build
+
+```
+
+#### 4. Зв'яжіть локально для тестування
+
+```bash
+
+npm link
+
+```
+
+Тепер ви можете використовувати команду `refunjs` глобально у вашій системі для тестування:
+
+```bash
+
+refunjs my-test-app
+
+cd my-test-app
+
+npm run dev
+
+```
+
+#### 5. Структура проєкту
+
+```
+
+refunjs/
+
+├── src/
+
+│   ├── commands/               # Реалізації CLI команд
+
+│   │   ├── createProject.js
+
+│   │   ├── addPage.js
+
+│   │   ├── addComponent.js
+
+│   │   ├── installCommand.js
+
+│   │   └── helpCommand.js
+
+│   ├── utils/                  # Допоміжні функції
+
+│   │   ├── copyDir.js
+
+│   │   ├── replaceInFiles.js
+
+│   │   ├── installDependencies.js
+
+│   │   ├── mergeFiles.js
+
+│   │   └── namingUtils.js
+
+│   └── index.js                # Точка входу CLI
+
+├── core/                       # Базовий шаблон проєкту
+
+│   ├── src/
+
+│   │   ├── .refunjs/             # Системні файли фреймворку
+
+│   │   ├── components/         # Компоненти для повторного використання
+
+│   │   ├── pages/              # Компоненти сторінок
+
+│   │   ├── hooks/              # Кастомні хуки
+
+│   │   ├── utils/              # Утиліти
+
+│   │   └── styles/             # Глобальні стилі
+
+│   ├── public/
+
+│   ├── package.json
+
+│   ├── tsconfig.json
+
+│   └── vite.config.ts
+
+├── features/                   # Модулі опціональних функцій
+
+│   ├── test/                   # Налаштування тестування Jest
+
+│   └── i18n/                   # Інтернаціоналізація
+
+├── package.json
+
+└── README.md
+
+```
+
+### Використання
+
+Після налаштування проєкту для розробки, ви можете:
+
+#### 1. Тестувати CLI команди
+
+Створіть тестовий проєкт для перевірки змін:
+
+```bash
+
+refunjs create test-project
+
+cd test-project
+
+npm run dev
+
+```
+
+#### 2. Модифікувати основний шаблон
+
+Редагуйте файли в директорії `core/` для зміни структури проєкту за замовчуванням:
+
+- Оновіть `core/src/` для модифікації базового додатку
+
+- Додайте нові компоненти в `core/src/components/`
+
+- Змініть стилізацію в `core/src/styles/`
+
+- Оновіть залежності в `core/package.json`
+
+#### 3. Додавати або модифікувати функції
+
+Працюйте над опціональними функціями в директорії `features/`:
+
+- **Налаштування тестування**: `features/test/`
+
+- **Інтернаціоналізація**: `features/i18n/`
+
+Кожен модуль функції містить:
+
+- Модифікації/доповнення компонентів
+
+- Конфігураційні файли
+
+- Залежності в `package.json`
+
+#### 4. Оновлювати CLI команди
+
+Модифікуйте реалізації команд в `src/commands/`:
+
+- `createProject.js` — Логіка ініціалізації проєкту
+
+- `addPage.js` — Генерація сторінок з file-based роутингом
+
+- `addComponent.js` — Створення каркасу компонентів
+
+- `installCommand.js` — Управління залежностями
+
+- `helpCommand.js` — Довідкова документація CLI
+
+#### 5. Тестувати зміни
+
+Перед відправкою змін:
+
+```bash
+
+# Зберіть CLI
+
+npm run build
+
+
+# Протестуйте в чистій директорії
+
+cd /tmp
+
+refunjs test-app
+
+cd test-app
+
+npm run dev
+
+npm run build
+
+npm run test  # Якщо була обрана функція тестування
+
+```
+
+#### 6. Якість коду
+
+Підтримуйте якість коду:
+
+```bash
+
+# Форматуйте код
+
+npm run format
+
+
+# Перевірте код лінтером
+
+npm run lint
+
+```
+
+### Робочий процес розробки
+
+1. **Внесіть зміни** — Редагуйте файли в `src/`, `core/` або `features/`
+
+2. **Зберіть** — Запустіть `npm run build` для компіляції змін
+
+3. **Протестуйте** — Створіть тестовий проєкт та перевірте функціональність
+
+4. **Зробіть коміт** — Використовуйте чіткі, описові повідомлення коміту
+
+5. **Відправте PR** — Відкрийте pull request з вашими змінами
+
+### Ліцензія та правила спільноти
+
+- [Ліцензія](LICENSE) — ліцензія проєкту
+
+- [Кодекс поведінки](CODE_OF_CONDUCT.md) — очікувана поведінка для контриб'юторів
+
+- [Посібник з внеску](CONTRIBUTING.md) — як допомогти проєкту
+
+- [Політика безпеки](SECURITY.md) — повідомлення про проблеми безпеки
