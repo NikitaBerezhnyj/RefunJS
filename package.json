@@ -1,7 +1,7 @@
 {
   "name": "refunjs",
-  "version": "1.0.3",
-  "description": "React-based framework",
+  "version": "1.0.4",
+  "description": "Modern React-based framework for building scalable web applications with enhanced developer experience",
   "type": "module",
   "main": "core/index.js",
   "bin": {
@@ -13,13 +13,44 @@
     "src",
     "LICENSE",
     "SECURITY.md",
-    "CODE_OF_CONDUCT.md"
+    "CODE_OF_CONDUCT.md",
+    "README.md"
   ],
   "scripts": {
     "start": "node src/index.js",
     "build": "babel src --out-dir dist --copy-files",
     "prepublishOnly": "node scripts/prepare-readme.js",
     "postpublish": "node scripts/restore-readme.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NikitaBerezhnyj/RefunJS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NikitaBerezhnyj/RefunJS/issues"
+  },
+  "homepage": "https://github.com/NikitaBerezhnyj/RefunJS#readme",
+  "keywords": [
+    "react",
+    "framework",
+    "refun",
+    "refunjs",
+    "web-framework",
+    "frontend",
+    "ui-framework",
+    "react-framework",
+    "build-tool",
+    "developer-tools",
+    "cli",
+    "webapp",
+    "spa",
+    "component-library"
+  ],
+  "author": "Nikita Berezhnyj",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   },
   "dependencies": {
     "@babel/generator": "^7.28.5",
@@ -35,5 +66,9 @@
     "@babel/cli": "^7.28.3",
     "@babel/preset-env": "^7.28.5",
     "shx": "^0.4.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   }
 }
