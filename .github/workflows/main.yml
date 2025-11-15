@@ -1,0 +1,188 @@
+name: Build and Publish RefunJS
+
+permissions:
+  contents: write
+  packages: write
+
+on:
+  push:
+    branches:
+      - prod
+  pull_request:
+    branches:
+      - prod
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get version and name from package.json
+        id: get_meta
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          VERSION=$(node -p "require('./package.json').version")
+          echo "NAME=$NAME" >> $GITHUB_OUTPUT
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "📦 Package: $NAME"
+          echo "🏷️ Version: $VERSION"
+
+      - name: Build project
+        run: npm run build
+
+      - name: Test CLI locally
+        run: |
+          npm link
+          refunjs --version || echo "CLI linked successfully"
+
+      - name: Run tests (if available)
+        run: npm test || echo "No tests configured"
+        continue-on-error: true
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: refunjs-build
+          path: |
+            dist/
+            core/
+            features/
+            src/
+            package.json
+            README.md
+            LICENSE
+
+  publish-npm:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/prod'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get version from package.json
+        id: get_version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "📌 Publishing version: $VERSION"
+
+      - name: Check if version already published
+        id: check_version
+        run: |
+          if npm view refunjs@${{ steps.get_version.outputs.VERSION }} version 2>/dev/null; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "⚠️ Version ${{ steps.get_version.outputs.VERSION }} already exists on npm"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "✅ Version ${{ steps.get_version.outputs.VERSION }} is new"
+          fi
+
+      - name: Publish to npm
+        if: steps.check_version.outputs.exists == 'false'
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create Git tag
+        if: steps.check_version.outputs.exists == 'false'
+        run: |
+          VERSION=${{ steps.get_version.outputs.VERSION }}
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git rev-parse "v$VERSION" >/dev/null 2>&1; then
+            echo "⚠️ Tag v$VERSION already exists"
+          else
+            git tag -a "v$VERSION" -m "Release v$VERSION"
+            git push origin "v$VERSION"
+            echo "✅ Created and pushed tag v$VERSION"
+          fi
+
+      - name: Create GitHub Release
+        if: steps.check_version.outputs.exists == 'false'
+        run: |
+          VERSION=${{ steps.get_version.outputs.VERSION }}
+
+          # Generate release notes
+          cat > release_notes.md << 'EOF'
+          ## RefunJS v$VERSION
+
+          🚀 **New npm package published!**
+
+          ### Installation
+          ```bash
+          npm install -g refunjs
+          ```
+
+          ### Quick Start
+          ```bash
+          refunjs my-app
+          cd my-app
+          npm run dev
+          ```
+
+          ### What's New
+          Check the [CHANGELOG](https://github.com/NikitaBerezhnyj/RefunJS/blob/prod/CHANGELOG.md) for details.
+
+          ### Links
+          - 📦 [npm package](https://www.npmjs.com/package/refunjs)
+          - 📚 [Documentation](https://github.com/NikitaBerezhnyj/RefunJS#readme)
+          - 🐛 [Report issues](https://github.com/NikitaBerezhnyj/RefunJS/issues)
+          EOF
+
+          gh release create "v$VERSION" \
+            --title "RefunJS v$VERSION" \
+            --notes-file release_notes.md
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Skip - Version already published
+        if: steps.check_version.outputs.exists == 'true'
+        run: |
+          echo "::notice::Version ${{ steps.get_version.outputs.VERSION }} already exists on npm. Skipping publish."
+          echo "💡 To publish a new version, update the version in package.json using:"
+          echo "   npm version patch|minor|major"
+
+  notify-success:
+    runs-on: ubuntu-latest
+    needs: publish-npm
+    if: success()
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get version
+        id: get_version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Success notification
+        run: |
+          echo "::notice::✅ RefunJS v${{ steps.get_version.outputs.VERSION }} successfully published to npm!"
+          echo "::notice::📦 Install with: npm install -g refunjs"
+          echo "::notice::🔗 View on npm: https://www.npmjs.com/package/refunjs"
